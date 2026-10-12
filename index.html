@@ -40,6 +40,8 @@
                         :disabled="ingredient.quantite <= 0">-</button>
             </div>
         </div>
+        <br/>
+        <h3 class="text-center">Prix du burger : {{ prixBurger }} €</h3>
     </div>
 </div>
 <script>
@@ -47,12 +49,21 @@
         el: "#app",
         data: {
             ingredients: [
-                { id: 'pain', nom: 'Pain', image: 'img/pain.png', quantite: 0 },
-                { id: 'salade', nom: 'Salade', image: 'img/salade.png', quantite: 0 },
-                { id: 'tomates', nom: 'Tomates', image: 'img/tomates.jpg', quantite: 0 },
-                { id: 'oignons', nom: 'Oignons', image: 'img/oignons.jpeg', quantite: 0 },
-                { id: 'steak', nom: 'Steak', image: 'img/steak.jpg', quantite: 0 }
+                { id: 'pain', nom: 'Pain', image: 'img/pain.png', prix: 1, quantite: 0 },
+                { id: 'salade', nom: 'Salade', image: 'img/salade.png', prix: 0.15, quantite: 0 },
+                { id: 'tomates', nom: 'Tomates', image: 'img/tomates.jpg', prix: 0.5, quantite: 0 },
+                { id: 'oignons', nom: 'Oignons', image: 'img/oignons.jpeg', prix: 0.3, quantite: 0 },
+                { id: 'steak', nom: 'Steak', image: 'img/steak.jpg', prix: 2, quantite: 0 }
             ]
+        },
+        computed: {
+            prixBurger: function () {
+                var total = 0;
+                this.ingredients.forEach(function (ingredient) {
+                    total += ingredient.prix * ingredient.quantite;
+                });
+                return total.toFixed(2);
+            }
         },
         methods: {
             ajouter: function (ingredient) {
