@@ -27,16 +27,29 @@
 <div class="container theme-showcase" role="main" style="width: 100%">
     <div id="app">
         <br/>
-        <!-- TODO -->
+        <div class="row">
+            <div class="col-md-2 text-center" v-for="ingredient in ingredients" :key="ingredient.id">
+                <img :src="ingredient.image" :alt="ingredient.nom" style="width: 100px; height: 100px;">
+                <h5>{{ ingredient.nom }}</h5>
+                <p>Quantité : {{ ingredient.quantite }}</p>
+                <button class="btn btn-success">+</button>
+                <button class="btn btn-danger">-</button>
+            </div>
+        </div>
     </div>
 </div>
 <script>
     new Vue({
         el: "#app",
         data: {
-            ingredients: [/* todo */],
+            ingredients: [
+                { id: 'pain', nom: 'Pain', image: 'img/pain.png', quantite: 0 },
+                { id: 'salade', nom: 'Salade', image: 'img/salade.png', quantite: 0 },
+                { id: 'tomates', nom: 'Tomates', image: 'img/tomates.png', quantite: 0 },
+                { id: 'oignons', nom: 'Oignons', image: 'img/oignons.png', quantite: 0 },
+                { id: 'steak', nom: 'Steak', image: 'img/steak.png', quantite: 0 }
+            ]
         }
-        /* TODO */
     });
 </script>
 </body>
