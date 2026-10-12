@@ -40,6 +40,40 @@
                         :disabled="ingredient.quantite <= 0">-</button>
             </div>
         </div>
+
+        <br/>
+
+        <!-- Menu -->
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="menu" v-model="menu">
+            <label class="form-check-label" for="menu">Je prends un menu (+3 €)</label>
+        </div>
+
+        <div v-if="menu" class="mt-3">
+            <div>
+                <p><strong>Accompagnement :</strong></p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="frites" value="Frites" v-model="accompagnement">
+                    <label class="form-check-label" for="frites">Frites</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="potatoes" value="Potatoes" v-model="accompagnement">
+                    <label class="form-check-label" for="potatoes">Potatoes</label>
+                </div>
+            </div>
+            <div class="mt-2">
+                <p><strong>Boisson :</strong></p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="coca" value="Coca" v-model="boisson">
+                    <label class="form-check-label" for="coca">Coca</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="eau" value="Verre d'eau" v-model="boisson">
+                    <label class="form-check-label" for="eau">Verre d'eau</label>
+                </div>
+            </div>
+        </div>
+
         <br/>
         <h3 class="text-center">Prix du burger : {{ prixBurger }} €</h3>
     </div>
@@ -54,7 +88,10 @@
                 { id: 'tomates', nom: 'Tomates', image: 'img/tomates.jpg', prix: 0.5, quantite: 0 },
                 { id: 'oignons', nom: 'Oignons', image: 'img/oignons.jpeg', prix: 0.3, quantite: 0 },
                 { id: 'steak', nom: 'Steak', image: 'img/steak.jpg', prix: 2, quantite: 0 }
-            ]
+            ],
+            menu: false,
+            accompagnement: 'Frites',
+            boisson: 'Coca'
         },
         computed: {
             prixBurger: function () {
@@ -62,6 +99,9 @@
                 this.ingredients.forEach(function (ingredient) {
                     total += ingredient.prix * ingredient.quantite;
                 });
+                if (this.menu) {
+                    total += 3;
+                }
                 return total.toFixed(2);
             }
         },
