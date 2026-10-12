@@ -32,8 +32,12 @@
                 <img :src="ingredient.image" :alt="ingredient.nom" style="width: 100px; height: 100px;">
                 <h5>{{ ingredient.nom }}</h5>
                 <p>Quantité : {{ ingredient.quantite }}</p>
-                <button class="btn btn-success">+</button>
-                <button class="btn btn-danger">-</button>
+                <button class="btn btn-success"
+                        @click="ajouter(ingredient)"
+                        :disabled="ingredient.quantite >= 3">+</button>
+                <button class="btn btn-danger"
+                        @click="supprimer(ingredient)"
+                        :disabled="ingredient.quantite <= 0">-</button>
             </div>
         </div>
     </div>
@@ -49,6 +53,18 @@
                 { id: 'oignons', nom: 'Oignons', image: 'img/oignons.jpeg', quantite: 0 },
                 { id: 'steak', nom: 'Steak', image: 'img/steak.jpg', quantite: 0 }
             ]
+        },
+        methods: {
+            ajouter: function (ingredient) {
+                if (ingredient.quantite < 3) {
+                    ingredient.quantite++;
+                }
+            },
+            supprimer: function (ingredient) {
+                if (ingredient.quantite > 0) {
+                    ingredient.quantite--;
+                }
+            }
         }
     });
 </script>
